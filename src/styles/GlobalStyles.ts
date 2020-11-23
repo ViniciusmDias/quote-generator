@@ -7,8 +7,14 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #121214;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
+    
+  }
+  #__next {
+    margin: 0 7%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 `;
