@@ -6,6 +6,8 @@ export const Header = styled.header`
   justify-content: flex-end;
 
   a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     font-weight: 500;
     font-size: 18px;
@@ -21,6 +23,15 @@ export const Hero = styled.main`
   justify-content: center;
   max-width: 60%;
   margin: 0 auto;
+
+  h3 {
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    color: #333333;
+    padding-left: 15%;
+    margin-bottom: 12vh;
+  }
 
   h1 {
     padding-left: 15%;
@@ -41,8 +52,10 @@ export const Hero = styled.main`
       left: 0;
     }
   }
-  a {
+  article {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     margin: 0 5%;
     text-decoration: none;
@@ -60,6 +73,13 @@ export const Hero = styled.main`
           color: #828282;
         }
       }
+      svg {
+        color: #f2f2f2;
+      }
+    }
+
+    svg {
+      color: transparent;
     }
 
     div {

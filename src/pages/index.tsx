@@ -1,24 +1,44 @@
+import { GetServerSideProps } from 'next';
+import Link from 'next/link';
+import { BiRefresh } from 'react-icons/bi';
+import { BsArrowRight } from 'react-icons/bs';
 import { Header, Hero, Footer } from '../styles/pages/Home';
 
-export default function Home() {
+interface IQuote {
+  _id: string;
+  quoteText: string;
+  quoteAuthor: string;
+  quoteGenre: string;
+}
+
+interface HomeProps {
+  quote: IQuote;
+}
+
+export default function Home({ quote }: HomeProps) {
   return (
     <>
       <Header>
-        <a href="/">random</a>
+        <a href="/">
+          random <BiRefresh />
+        </a>
       </Header>
       <Hero>
-        <h1>
-          “The first rule of any technology used in a business is that
-          automation applied to an efficient operation will magnify the
-          efficiency. The second is that automation applied to an inefficient
-          operation will magnify the inefficiency.”
-        </h1>
-        <a href="/">
-          <div>
-            <h2>Bill Gates</h2>
-            <strong>business</strong>
-          </div>
-        </a>
+        <h1>{quote.quoteText}</h1>
+        <Link
+          href={{
+            pathname: '/Authors/[slug]',
+            query: { slug: quote.quoteAuthor },
+          }}
+        >
+          <article>
+            <div>
+              <h2>{quote.quoteAuthor}</h2>
+              <strong>{quote.quoteGenre}</strong>
+            </div>
+            <BsArrowRight />
+          </article>
+        </Link>
       </Hero>
       <Footer>
         <h3>Vinicius Dias @ DevChallenges.io</h3>
@@ -26,3 +46,16 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  const response = await fetch(
+    'https://quote-garden.herokuapp.com/api/v2/quotes/random',
+  );
+  const { quote } = await response.json();
+
+  return {
+    props: {
+      quote,
+    },
+  };
+};
